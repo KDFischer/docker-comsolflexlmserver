@@ -1,9 +1,12 @@
 version: "3.3"
 
 services:
-  comsollm:
-    image: docker-comsolflexlmserver
-    hostname: ldap.example.com
+  flexlm:
+    image: kdfischer/docker-comsolflexlmserver
+    hostname: flexlm.example.com
+    mac_address: ba:98:76:54:32:10
+    volumes:
+      - ./distrib/license.dat:/usr/local/flexlm/licenses/license.dat:ro
     ports:
       - 7018
       - 7019
@@ -12,8 +15,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-    labels:
-      - "traefik.frontend.rule=Host:ldap.example.com"
 
 secrets:
   comsol_license_5.3a:
