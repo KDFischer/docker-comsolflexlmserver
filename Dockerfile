@@ -22,15 +22,16 @@ RUN apt-get update \
 RUN addgroup --system lmadmin && \
     adduser --system  --no-create-home --ingroup lmadmin --disabled-password --disabled-login lmadmin
 
-ADD --chown=lmadmin:lmadmin distrib/glnxa64_53.tar.bz2 /opt/comsol_flexlm/
+ADD --chown=lmadmin:lmadmin distrib/glnxa64_56.tar.bz2 /opt/comsol_flexlm/
 RUN chown -R lmadmin:lmadmin /opt/comsol_flexlm
 RUN chmod 755 -R /opt/comsol_flexlm/glnxa64
-RUN mkdir /tmp/.flexlm && chown lmadmin:lmadmin /tmp/.flexlm && ln -s /tmp /usr/tmp
+RUN mkdir -p /tmp/.flexlm && chown lmadmin:lmadmin /tmp/.flexlm && ln -s /tmp /usr/tmp
+RUN mkdir -p /usr/local/flexlm/licenses/ && chown lmadmin:lmadmin /usr/local/flexlm/licenses
 
 #########################################
 ##              VOLUMES                ##
 #########################################
-VOLUME ["/var/flexlm"]
+VOLUME ["/usr/local/flexlm"]
 
 #########################################
 ##            EXPOSE PORTS             ##
