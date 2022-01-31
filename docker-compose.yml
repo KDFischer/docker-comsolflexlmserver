@@ -10,12 +10,11 @@ services:
     ports:
       - 7018
       - 7019
-    secrets:
-      - comsol_license_5.3a
     deploy:
       mode: replicated
       replicas: 1
-
-secrets:
-  comsol_license_5.3a:
-    external: true
+    labels:
+      - "traefik.1718.frontend.rule=Host:flexlm.example.com"
+      - "traefik.1718.port=1718"
+      - "traefik.1719.frontend.rule=Host:flexlm.example.com"
+      - "traefik.1719.port=1719"
